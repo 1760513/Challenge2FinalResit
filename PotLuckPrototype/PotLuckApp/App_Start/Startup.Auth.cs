@@ -58,11 +58,11 @@ namespace PotLuckApp
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "655884694544-a3a73vr58g6696jhgrrueac6v3cc7dlc.apps.googleusercontent.com",
+                ClientSecret = "5uzO3Y95rBBS4Lx8xXdXPT_o"
+            });
         }
     }
 }
