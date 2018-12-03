@@ -6,8 +6,7 @@
     [Venue] NVARCHAR(50) NULL, 
 	[HostId] INT NULL,
     [Host] NVARCHAR(50) NULL, 
-    [AmountSpent] MONEY NULL
-	CONSTRAINT [FK_HostId] FOREIGN KEY (HostId) REFERENCES PotLuckMembers(MemberId),
+    [AmountSpent] MONEY NULL,
 	[Cancelled] BIT NULL, 
-    CONSTRAINT [FK_Host] FOREIGN KEY (Host) REFERENCES PotLuckMembers(FirstName)
+	CONSTRAINT [FK_HostId] FOREIGN KEY (HostId) REFERENCES PotLuckMembers(MemberId)
 )
