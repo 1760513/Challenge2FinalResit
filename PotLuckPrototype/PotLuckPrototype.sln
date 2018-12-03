@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PotLuckPrototype", "PotLuckPrototype\PotLuckPrototype.csproj", "{A395F0CB-7587-495F-A644-492AEA16CD8F}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PotLuckDatabase", "PotLuckDatabase\PotLuckDatabase.sqlproj", "{2FAF4C0C-EA81-411F-B389-E6AD46B337DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,12 @@ Global
 		{A395F0CB-7587-495F-A644-492AEA16CD8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A395F0CB-7587-495F-A644-492AEA16CD8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A395F0CB-7587-495F-A644-492AEA16CD8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FAF4C0C-EA81-411F-B389-E6AD46B337DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FAF4C0C-EA81-411F-B389-E6AD46B337DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FAF4C0C-EA81-411F-B389-E6AD46B337DD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2FAF4C0C-EA81-411F-B389-E6AD46B337DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FAF4C0C-EA81-411F-B389-E6AD46B337DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FAF4C0C-EA81-411F-B389-E6AD46B337DD}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
