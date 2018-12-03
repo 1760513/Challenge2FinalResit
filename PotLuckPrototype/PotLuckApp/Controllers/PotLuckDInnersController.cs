@@ -21,6 +21,12 @@ namespace PotLuckApp.Controllers
             return View(potLuckDInners.ToList());
         }
 
+        public ActionResult FutureDinners()
+        {
+            var potLuckDInners = db.PotLuckDInners.Include(p => p.PotLuckMember);
+            return View(potLuckDInners.ToList());
+        }
+
         // GET: PotLuckDInners/Details/5
         public ActionResult Details(int? id)
         {

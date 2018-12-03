@@ -323,6 +323,7 @@
     <Content Include="Views\PotLuckDInners\Details.cshtml" />
     <Content Include="Views\PotLuckDInners\Edit.cshtml" />
     <Content Include="Views\PotLuckDInners\Index.cshtml" />
+    <Content Include="Views\PotLuckDInners\FutureDinners.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
