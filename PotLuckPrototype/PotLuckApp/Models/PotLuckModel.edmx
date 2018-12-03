@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PotLuckDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PotLuckDInners">
+          <Key>
+            <PropertyRef Name="DinnerId" />
+          </Key>
+          <Property Name="DinnerId" Type="int" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Venue" Type="nvarchar" MaxLength="50" />
+          <Property Name="HostId" Type="int" />
+          <Property Name="Host" Type="nvarchar" MaxLength="50" />
+          <Property Name="AmountSpent" Type="money" />
+          <Property Name="Cancelled" Type="bit" />
+        </EntityType>
+        <EntityType Name="PotLuckMembers">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Authorised" Type="bit" />
+        </EntityType>
+        <Association Name="FK_HostId">
+          <End Role="PotLuckMembers" Type="Self.PotLuckMembers" Multiplicity="0..1" />
+          <End Role="PotLuckDInners" Type="Self.PotLuckDInners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PotLuckMembers">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="PotLuckDInners">
+              <PropertyRef Name="HostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PotLuckDatabaseModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PotLuckDInners" EntityType="Self.PotLuckDInners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PotLuckMembers" EntityType="Self.PotLuckMembers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_HostId" Association="Self.FK_HostId">
+            <End Role="PotLuckMembers" EntitySet="PotLuckMembers" />
+            <End Role="PotLuckDInners" EntitySet="PotLuckDInners" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PotLuckDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PotLuckDInner">
+          <Key>
+            <PropertyRef Name="DinnerId" />
+          </Key>
+          <Property Name="DinnerId" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="Time" Precision="7" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Venue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HostId" Type="Int32" />
+          <Property Name="Host" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AmountSpent" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Cancelled" Type="Boolean" />
+          <NavigationProperty Name="PotLuckMember" Relationship="Self.FK_HostId" FromRole="PotLuckDInners" ToRole="PotLuckMembers" />
+        </EntityType>
+        <EntityType Name="PotLuckMember">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Authorised" Type="Boolean" />
+          <NavigationProperty Name="PotLuckDInners" Relationship="Self.FK_HostId" FromRole="PotLuckMembers" ToRole="PotLuckDInners" />
+        </EntityType>
+        <Association Name="FK_HostId">
+          <End Role="PotLuckMembers" Type="Self.PotLuckMember" Multiplicity="0..1" />
+          <End Role="PotLuckDInners" Type="Self.PotLuckDInner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PotLuckMembers">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="PotLuckDInners">
+              <PropertyRef Name="HostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PotLuckDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
+          <EntitySet Name="PotLuckDInners" EntityType="Self.PotLuckDInner" />
+          <EntitySet Name="PotLuckMembers" EntityType="Self.PotLuckMember" />
+          <AssociationSet Name="FK_HostId" Association="Self.FK_HostId">
+            <End Role="PotLuckMembers" EntitySet="PotLuckMembers" />
+            <End Role="PotLuckDInners" EntitySet="PotLuckDInners" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PotLuckDatabaseModelStoreContainer" CdmEntityContainer="PotLuckDatabaseEntities">
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="PotLuckDatabaseModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PotLuckDInners">
+            <EntityTypeMapping TypeName="PotLuckDatabaseModel.PotLuckDInner">
+              <MappingFragment StoreEntitySet="PotLuckDInners">
+                <ScalarProperty Name="DinnerId" ColumnName="DinnerId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Venue" ColumnName="Venue" />
+                <ScalarProperty Name="HostId" ColumnName="HostId" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="AmountSpent" ColumnName="AmountSpent" />
+                <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PotLuckMembers">
+            <EntityTypeMapping TypeName="PotLuckDatabaseModel.PotLuckMember">
+              <MappingFragment StoreEntitySet="PotLuckMembers">
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Authorised" ColumnName="Authorised" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
